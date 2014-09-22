@@ -6,27 +6,15 @@
     <script src="./javascripts/chat.js"></script>
     <script src="./javascripts/chat_ui.js"></script>
     <script>
-      var socket = io('http://localhost');
-      
       $(function () {
-        var chatUI = new ChatUI($('#message'), $('#messages'));
-
-        socket.on('message', function (data) {
-          chatUI.recvMessage(data.text);
-        });        
-
-        $('form').on('submit', function (event) {
-          event.preventDefault();
-
-          var message = chatUI.getMessage();
-          chatUI.sendMessage(message);
-        });
+        var chatUI = new ChatUI($('#chatForm'), $('#message'), $('#messages'));
+        chatUI.run();
       });
     </script>
   </head>
 
   <body>
-    <form>
+    <form id="chatForm">
       <label for="message">Message</label>
       <input id="message" type="text">
       <button>Send</button>
