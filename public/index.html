@@ -1,17 +1,37 @@
 <html>
-<head>
-  <title>node chat app</title>
-  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-</head>
-<body>
-  chat hello
-  <form>
-    <label for="formInput"> input </label>
-    <input type="text" id="formInput">
-    
-    
-    <button> Submit </button>
-  </form>
-</body>
+  <head>
+    <title>Chat App</title>
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="./javascripts/chat.js"></script>
+    <script src="./javascripts/chat_ui.js"></script>
+    <script>
+      var socket = io('http://localhost');
+      
+      $(function () {
+        var chatUI = new ChatUI($('#message'), $('#messages'));
 
+        socket.on('message', function (data) {
+          chatUI.recvMessage(data.text);
+        });        
+
+        $('form').on('submit', function (event) {
+          event.preventDefault();
+
+          var message = chatUI.getMessage();
+          chatUI.sendMessage(message);
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <form>
+      <label for="message">Message</label>
+      <input id="message" type="text">
+      <button>Send</button>
+    </form>
+
+    <ul id="messages"></ul>
+  </body>
 </html>
