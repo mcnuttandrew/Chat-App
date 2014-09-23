@@ -35,7 +35,7 @@ ChatUI.prototype.bindEvents = function () {
   }.bind(this));
   
   socket.on('listUsers', function(data){
-    this.$users.empty();
+    this.$users.empty();    
     data.users.forEach( this.addUser.bind(this));
   }.bind(this));
   
