@@ -81,15 +81,21 @@ ChatUI.prototype.bindEvents = function () {
 };
 
 ChatUI.prototype.sysMsg = function (msg) {
-  this.recvMessage('[SYS]', msg);
+  this.recvMessage('[System]', msg, 'sysmsg');
 };
 
 ChatUI.prototype.getInputValue = function () {
   return this.$input.val();
 };
 
-ChatUI.prototype.recvMessage = function (user, message) {
-  this.$messages.prepend('<li>' + user + ': ' + message + '</li>'); 
+ChatUI.prototype.recvMessage = function (user, message, cssClass) {
+  var $li = $('<li>').text(user + ': ' + message);
+  
+  if (cssClass) {
+    $li.addClass(cssClass);
+  }
+  
+  this.$messages.append($li); 
 };
 
 ChatUI.prototype.addUser = function (user) {

@@ -7,7 +7,7 @@
     <script src="./javascripts/chat_ui.js"></script>
     <script>
       $(function () {
-        var chatUI = new ChatUI($('#chatForm'),
+        var chatUI = new ChatUI($('#chat-form'),
           $('#message'),
           $('#messages'),
           $('#users'),
@@ -16,23 +16,28 @@
         chatUI.run();
       });
     </script>
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
   </head>
 
   <body>
-    <form id="chatForm">
-      <label for="message">Message</label>
-      <input id="message" type="text">
-      <button>Send</button>
-    </form>
-
-    <div>
-      <h2>Users</h2>
-      <ul id="users"></ul>
-    </div>
-
-    <div>
-      <h2 id="room"></h2>
-      <ul id="messages"></ul>
-    </div>
+    <main id='wrapper'>
+      <section id='users-wrapper'>
+        <h2>Users</h2>
+        <ul id='users'></ul>
+      </section>
+      
+      <section id='messages-wrapper'>
+        <h2 id='room'></h2>
+        <ul id='messages'></ul>
+      </section>
+      
+      <section id='chat-form-wrapper'>
+        <form id="chat-form">
+          <input id="message" type="text" placeholder="Enter a message...">
+          <button>Send</button>
+        </form>
+      </section>
+    </main>
   </body>
 </html>
